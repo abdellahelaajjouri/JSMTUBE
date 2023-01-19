@@ -1,6 +1,5 @@
-export { default as Home } from "./Home";
-export { default as MoviesList} from "./MoviesList";
-export { default as NavBar } from "./NavBar";
-export { default as SearchBar } from "./SearchBar";
-export { default as TopImdb } from "./TopImdb";
-export { default as TvSeries } from "./TvSeries";
+export  { default as NavBar} from './NavBar';
+export  { default as SearchFeed} from './SearchFeed';
+export  { default as VideoCard} from './VideoCard';
+export  { default as VideoDetail} from './VideoDetail';
+export  { default as Home} from './VideoDetail';

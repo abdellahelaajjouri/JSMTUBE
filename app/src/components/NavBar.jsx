@@ -1,38 +1,45 @@
-import React from "react";
-import { Stack } from "@mui/material";
-import { Link } from "react-router-dom";
+import React , {useState } from 'react'
+import {useNavigate} from 'react-router-dom'
+import {AppBar , Toolbar , Input , IconButton , Typography} from '@mui/material'
+import { Search } from "@mui/icons-material";
 
-import SearchBar from "./SearchBar";
-const NavBar = () => (
-  <Stack
-    direction="row"
-    justifyContent="space-between"
-    alignItems="center"
-    p={2}
-    sx={{ position: "sticky", top: "0" , background : "black"}}
-  >
-    <Link to="/" style={{ display: "flex", alignItems: "center" }}>
-      LOGO
-    </Link>
+function NavBar() {
+  const [value, setValue] = useState("")
+  const navigate = useNavigate()
+  const handleChange = (event) =>{
+    setValue(event.target.value)
+  }
+  
+  const handleSubmit = (event) =>{
+    event.preventDefault()
+    if (value){
+      navigate(`/search/${value}`)
+      setValue('')
+    }
+  }
+  return (
+    <AppBar sx={{display:'flex', justifyContent:{md :'space-between', sm : 'space-around'},alignItems:'center', flexDirection:'row'}}>
+      <Toolbar>
+        <Typography variant="h5">
+            YoutFocus
+        </Typography>
+      </Toolbar>
+      <Toolbar component="form" onSubmit={handleSubmit}>
+        <Input type='text' onChange={handleChange} value={value}/>
+        <IconButton  type='submit' sx={{ p: "10px", color: "#fff" }}>
+          <Search />
+        </IconButton>
+      </Toolbar>
+    </AppBar>
+  )
+}
 
-    <Link to="/" style={{ display: "flex", alignItems: "center" }}>
-      HOME
-    </Link>
+export default NavBar
 
-    <Link to="/MoviesList" style={{ display: "flex", alignItems: "center" }}>
-      MOVIES
-    </Link>
+// AppBar: This component is used to create a top app bar that can contain elements such as a toolbar, menu, or a title. You can use this component to create the top bar that contains the YouTube logo and the search bar.
 
-    <Link to="/tvSeries" style={{ display: "flex", alignItems: "center" }}>
-      TV SERIES
-    </Link>
+// Toolbar: This component is used to create a toolbar that can contain other elements such as buttons, text, and icons. You can use it to create the container for the YouTube logo and the search bar.
 
-    <Link to="/topImdb" style={{ display: "flex", alignItems: "center" }}>
-      TOP IMDB
-    </Link>
-    
-    <SearchBar />
-  </Stack>
-);
+// Input: This component is used to create an input field where the user can enter the search term. You can use it to create the search bar component.
 
-export default NavBar;
+// IconButton: This component is used to create a button that contains an icon. You can use it to create a button for the YouTube logo.
