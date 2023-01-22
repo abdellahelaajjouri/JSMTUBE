@@ -2,7 +2,7 @@ import React , {useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 import {AppBar , Toolbar , Input , IconButton , Typography} from '@mui/material'
 import { Search } from "@mui/icons-material";
-
+import { Link } from 'react-router-dom';
 function NavBar() {
   const [value, setValue] = useState("")
   const navigate = useNavigate()
@@ -13,16 +13,18 @@ function NavBar() {
   const handleSubmit = (event) =>{
     event.preventDefault()
     if (value){
-      navigate(`/search/${value}`)
+      navigate(`/searchFeed/${value}`)
       setValue('')
     }
   }
   return (
     <AppBar sx={{display:'flex', justifyContent:{md :'space-between', sm : 'space-around'},alignItems:'center', flexDirection:'row'}}>
-      <Toolbar>
-        <Typography variant="h5">
-            YoutFocus
-        </Typography>
+      <Toolbar sx={{display:'flex', justifyContent:'center'}}>
+        <Link to='/' style={{textDecoration : 'none' , color:'black'}}>
+          <Typography variant="h5">
+              YoutFocus
+          </Typography>
+        </Link>
       </Toolbar>
       <Toolbar component="form" onSubmit={handleSubmit}>
         <Input type='text' onChange={handleChange} value={value}/>
