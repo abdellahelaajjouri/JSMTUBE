@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState, useEffect } from "react";
 import ReactPlayer from 'react-player'
 import { fetchFromAPI } from "../utils/fetchFromAPI";
@@ -7,6 +8,8 @@ import { CheckCircle } from "@mui/icons-material";
 const VideoDetail = () => {
   const [videoData, setVideoData] = useState(null);
   const { id } = useParams();
+
+
   useEffect(() => {
     fetchFromAPI(`videos?part=snippet,statistics&id=${id}`)
     .then(data => setVideoData(data.items[0]))
@@ -16,13 +19,22 @@ const VideoDetail = () => {
   if (!videoData) {
     return <p>Loading...</p>;
   }
+  const URL =  `https://www.youtube.com/watch?v=${id}`
 
   const {snippet : {title  , channelTitle}, statistics : {viewCount , likeCount}}= videoData;
+
+
+const handleDownload = async (event) => {
+  event.preventDefault()
+  console.log('download')
+}
+
+
 
   return (
     <Box minHeight='95h' display='flex' justifyContent='center' >
       <Box sx={{maxWidth :'60vw'}} mt='15vh'>
-        <ReactPlayer url={`https://www.youtube.com/watch?v=${id}`}
+        <ReactPlayer url={URL}
           className="react-player" controls
         />
         <Typography color="black" variant='h5' fontWeight="bold" p={2}>
@@ -41,7 +53,10 @@ const VideoDetail = () => {
                   {parseInt(likeCount).toLocaleString()} likes
             </Typography>
           </Stack>
-        </Stack>
+        </Stack> 
+        <button onClick={handleDownload}> 
+            Download
+        </button>
       </Box>
     </Box>
   );
