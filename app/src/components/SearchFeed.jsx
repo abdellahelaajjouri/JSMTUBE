@@ -7,9 +7,10 @@ function SearchFeed() {
   const [videos, setVideos] = useState([]);
   const { id } = useParams();
   useEffect(() => {
-    fetchFromAPI(`search?part=snippet&q=${id}`).then((data) =>
-      setVideos(data.items)
-    );
+    fetchFromAPI(`search?part=snippet&q=${id}`).then((data) => {
+      const videos = data.items.filter((item) => item.id.kind === "youtube#video");
+      setVideos(videos);
+    });
   }, [id]);
   return (
     <Box p={2}  mt={7} sx={{ overflowY: "auto", height: "90vh", flex: 2 }} >

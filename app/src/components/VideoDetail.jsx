@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useState, useEffect } from "react";
 import ReactPlayer from 'react-player'
 import { fetchFromAPI } from "../utils/fetchFromAPI";
@@ -24,10 +23,11 @@ const VideoDetail = () => {
   const {snippet : {title  , channelTitle}, statistics : {viewCount , likeCount}}= videoData;
 
 
-const handleDownload = async (event) => {
-  event.preventDefault()
-  console.log('download')
-}
+  const handleDownload = async (event) => {
+    event.preventDefault()
+   window.open(`https://www.youtubepi.com/watch?v=${id}`)
+  }
+  
 
 
 
