@@ -7,7 +7,7 @@ function SearchFeed() {
   const [videos, setVideos] = useState([]);
   const { id } = useParams();
   useEffect(() => {
-    fetchFromAPI(`search?part=snippet&q=trailer${id}`).then((data) => {
+    fetchFromAPI(`search?part=snippet&q=${id}`).then((data) => {
       const videos = data.items.filter((item) => item.id.kind === "youtube#video");
       setVideos(videos);
     });
